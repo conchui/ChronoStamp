@@ -39,8 +39,9 @@ test:
   host: localhost
 
 production:
-  adapter: mysql
-  database: chronostamp_prod
-  username: root
-  password: 
-  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  database: chronostamp_production
+  pool: 5
+  username: myapp
+  password: password1
