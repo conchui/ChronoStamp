@@ -1,0 +1,38 @@
+<div class="show-task">
+  <h5><%= @task.name %></h5>
+  <%= link_to button_tag('Edit'), edit_task_path %>
+  <%= link_to button_tag('Delete'), @task, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <br>
+
+  <strong>Project: </strong><br>
+    <%= link_to @task.project.name, project_path(@task.project.id) %><br><br>
+
+  <strong>Start: </strong><br>
+    <% if @task.start_time.nil? %>
+      <%= '0000-00-00 00:00:00' %><br>
+    <% else %>  
+      <%= @task.start_time.to_s(:db) %><br>
+    <% end  %><br>
+
+  <strong>End: </strong><br>
+    <% if @task.end_time.nil? %>
+      <%= '0000-00-00 00:00:00' %><br>
+    <% else %>  
+      <%= @task.end_time.to_s(:db) %><br>
+    <% end  %><br>
+
+  <strong>Made by: </strong><br>
+    <%= @task.user.first_name+" "+@task.user.last_name %><br><br>
+
+  <strong>Assigned people: </strong><br>
+    <% @task.assigned_people.each do |person| %>
+      <%= person.first_name+" "+person.last_name %> <br>
+    <% end %><br>
+    
+  <%= form_tag task_time_path do%>
+    <%= hidden_field_tag :id, @task.id %>
+    <%= submit_tag 'Start' %>
+  <% end %>
+
+</div>
+

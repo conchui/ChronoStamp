@@ -1,0 +1,42 @@
+<% unless current_user.role_id == 3 %>
+<div class="manage">
+  <h5>Managers</h5>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th> 
+        <th>Options</th>
+      </tr>
+
+    <% @managers.each do |manager| %>
+      <tr>
+        <td><%= manager.first_name %> <%= manager.last_name %></td>
+        <td><%= manager.email %></td>
+        <td>
+          <%= link_to button_tag('Attendance'), track_user_path(manager.id) %>
+          <%= link_to_if current_user.role_id == 1, button_tag('Edit Role'), edit_users_path(manager.id), disable: true %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+
+  <h5>Users</h5>
+    <table>
+      <tr>
+        <th>Name</th> 
+        <th>Email</th>
+        <th>Options</th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.first_name %> <%= user.last_name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to button_tag('Attendance'), track_user_path(user.id) %>
+            <%= link_to button_tag('Edit Role'), edit_users_path(user.id) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>

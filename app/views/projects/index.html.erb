@@ -1,0 +1,48 @@
+<% if current_user %>
+  <% unless current_user.role_id == 3 %>
+    <%= link_to button_tag("Create Project"), new_project_path %>
+  <% end %>
+
+  <% @projects.each do |project| %>
+    <table>
+      <tr>
+        <th colspan = "4"><h5 style="margin:0;" > 
+          <%= link_to project.name, project_path(project.id) %></h5>
+        </th>
+        <th>
+          <%= link_to button_tag('Add Task'), new_task_path(id: project.id) %>
+        </th>
+      </tr>
+      <tr>
+        
+        <td><strong>Description</strong></td> 
+        <td><strong>Deadline</strong></td>
+        <td><strong>Made By</strong></td> 
+        <td><strong>Project Group</strong></td>
+        <td><strong>Tasks</strong></td>
+
+      </tr>
+      <tr>
+        <td><%= project.description %> </td>
+        <td><%= project.deadline.to_s(:long) %> </td>
+        <td><%= project.user.first_name %> 
+            <%= project.user.last_name %> 
+        </td>
+        <td>
+          <% project.users.each do |makers| %> 
+            <%= makers.first_name %> <%= makers.last_name %><br>
+          <% end %>
+        </td>
+        <td>
+          <% project.tasks.each do |task| %> 
+            <% if task.assigned_people.detect{|pep| pep.id == @user.id} ||current_user.role_id <= 2  %>
+              <%= link_to task.name, task_path(task.id) %><br>
+            <% else %>
+              <%= task.name %><br>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  <% end %>  
+<% end %>

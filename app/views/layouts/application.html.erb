@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <title>Chrono Stamp</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+  <%= csrf_meta_tags %>
+
+</head>
+<body>
+
+  <div id="header">
+    <div class="container" style="padding-top: 3%">
+      <h2><strong><%= link_to "ChronoStamp*", users_path %></strong></h2>
+    </div>
+  </div>
+
+  <div class = "nav">
+    <div class="container">
+      <% if current_user  %>
+        <table>
+          <tr>
+            <td onclick="location.href='<%= users_path %>'">
+              <%= link_to "Dashboard", users_path %>
+            </td> 
+            <% unless current_user.role_id == 3 %> 
+            <td onclick="location.href='<%= manage_users_path %>'">
+              <%= link_to "Employees", manage_users_path %>
+            </td>
+            <% end %>        
+            <td onclick="location.href='<%= projects_path%>'">
+              <%= link_to "Projects", projects_path %>
+            </td>
+            <td onclick="location.href='<%= time_tracker_path %>'">
+              <%= link_to "Timesheet", time_tracker_path %>
+            </td>
+            <td onclick="location.href='<%= password_reset_path %>'">
+              <%= link_to "Password Reset", password_reset_path %>
+            </td>
+            <td onclick="location.href='<%= log_out_path %>'">
+              <%= link_to "Log Out", log_out_path %>
+            </td>
+          </tr>
+        </table>
+    </div>
+  </div>
+          <div class="container" align="right">
+            Logged in as: 
+            <%= current_user.first_name %> <%= current_user.last_name %>
+          </div>
+  <div class = "nav">
+    <div class="container">
+      <% else %>
+        <table>
+          <tr>
+            <td onclick="location.href='<%= sign_up_path %>'">
+              <%= link_to "Sign Up", sign_up_path %>
+            </td>
+            <td onclick="location.href='<%= log_in_path %>'">
+              <%= link_to "Log In", log_in_path %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <div id="parts">
+    <div class="container" >
+        <span class="notif" align="center">
+          <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, :id => "flash_#{name}" %><br>
+          <% end %>
+        </span>
+      <%= yield %>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+      <div class="row">
+      .Copyright Rhodel Conchui Perez, 2014-2015. All rights reserved ©
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<script type="text/javascript" src="http://jchavannes.com/include/scripts/3p/jquery.timer.js"></script>
+<script type="text/javascript" src="http://jchavannes.com/include/scripts/timer-demo.js"></script>
+<span id="stopwatch">00:00:00</span>
+
+  <%= form_tag task_time_path do%>
+    <%= hidden_field_tag :id, @task.id %>
+    <%= submit_tag 'End' %>
+  <% end %>

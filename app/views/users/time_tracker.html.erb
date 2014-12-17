@@ -1,0 +1,28 @@
+<div class="time_track">
+  <h5><%= Date.today.to_s(:long) %></h5>  
+  
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Time In</th>
+      <th>Time Out</th>
+      <th>Total Time</th>
+    </tr>
+    <% @trackers.each do |track| %>
+      <tr>
+        <td><%= track.created_at.to_date.to_s(:long) %></td> 
+        <td><%= track.time_in %></td>
+        <td><%= track.time_out %></td>
+        <% if track.time_out.present? %>
+          <td><%= number_with_precision(((track.time_out.to_time - track.time_in.to_time) / 3600), :precision => 2) %></td>
+        <% else %>
+          <td>0.00</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <br>
+  <%= form_tag ('time_stamp') do%>
+    <%= submit_tag 'Time Stamp' %>
+  <% end %>
+</div>

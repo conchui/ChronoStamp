@@ -1,0 +1,12 @@
+<div class="makers">
+  <% unless current_user.role_id == 3 %>
+  	<h5><%= "Assign group for "+@project.name %></h5>
+    <%= form_tag ('add_makers') do%>
+       <%= collection_check_boxes(:makers, :user_ids, User.all, :id, :first_name, checked: @doers ) do |b| %>
+         <%= b.check_box %> <%= b.label %><br>
+      <% end %>
+      <%= hidden_field_tag :project_id, params[:id] %>
+      <%= submit_tag 'Assign Group' %>
+    <% end %>
+  <% end %>
+</div>

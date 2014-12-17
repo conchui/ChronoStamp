@@ -1,0 +1,21 @@
+<div class="pass_reset">
+  <h5>Password Reset</h5>
+
+  <%= form_for(@user) do |f| %>
+    <div class="field">
+      <%= f.label :old_password %><br>
+      <%= f.password_field :old_password %>
+    </div><br>
+    <div class="field">
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+    </div><br>
+    <div class="field">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
+    </div><br>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

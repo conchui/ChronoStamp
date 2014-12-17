@@ -1,0 +1,25 @@
+<% if @project.present? %>
+  <h5>Task for <%= link_to @project.name, project_path(@project.id) %></h5>
+  <%= form_for(@task) do |f| %>
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div><br>
+    <div class="field">
+      <%= f.hidden_field :user_id, value: @taskmaker.id%>
+      <%= f.hidden_field :project_id, value: @project.id %>
+    </div>
+    <div class="field">
+      <%= f.label 'Assign people ' %><br>
+      <%= collection_check_boxes(:assign, :user_ids, @peps, :id, :first_name, checked: @taskpeps ) do |b| %>
+         <%= b.check_box %>
+         <%= b.label %>
+         <br>
+      <% end %>
+    </div><br>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+<% end %>
