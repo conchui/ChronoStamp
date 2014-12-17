@@ -117,7 +117,7 @@ class TasksController < ApplicationController
   def destroy
     set_session
     @task = Task.find(params[:id])
-    unless @task.user.role.id <= 2 && @user.role_id == 3
+    unless @task.user.role_id <= 2 && @user.role_id == 3
       @task.working_tasks.destroy_all
       @task.destroy
       redirect_to projects_path
