@@ -20,6 +20,7 @@ gem 'jquery-rails'
 
 gem 'mysql'
 gem 'pg'
+gem 'rails_12factor', group: :production
 
 gem 'rspec-rails'
 
