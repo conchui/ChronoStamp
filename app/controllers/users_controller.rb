@@ -7,11 +7,7 @@ class UsersController < ApplicationController
     @tasks = current_user.tasks_working
     @projects = current_user.project
     year = 2013
-    @holidays = Holiday.where("YEAR(holiday_date) = ?", year)
-    while year <= 2017
-      year += 1
-      @holidays += Holiday.where("YEAR(holiday_date) = ?", year)
-    end
+
   end
 
 
