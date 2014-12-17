@@ -66,7 +66,7 @@ class TasksController < ApplicationController
   def update
     set_session
     @task = Task.find(params[:id])
-    unless @task.user.role.id <= 2 && @user.role_id == 3
+    unless @task.user.role_id <= 2 && @user.role_id == 3
       if set_doers.count >= 2
         if @task.update(set_task)
           WorkingTask.where(task_id: @task.id).delete_all
